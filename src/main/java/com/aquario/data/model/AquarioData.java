@@ -7,24 +7,20 @@ import java.util.List;
 public class AquarioData {
 
     private String currentTime;
-    private Date currentDate;
+    private String currentDate;
     private String currentDay;
     private String currentTankTemp;
-    private List<DaySchedule> currentLightsSchedule;
-    private List<DaySchedule> currentCo2Schedule;
+//    private List<DaySchedule> currentLightsSchedule;
+//    private List<DaySchedule> currentCo2Schedule;
 
     public AquarioData(String currentTime,
-                       Date currentDate,
+                       String currentDate,
                        String currentDay,
-                       String currentTankTemp,
-                       List<DaySchedule> currentLightsSchedule,
-                       List<DaySchedule> currentCo2Schedule) {
+                       String currentTankTemp) {
         this.currentTime = currentTime;
         this.currentDate = currentDate;
         this.currentDay = currentDay;
         this.currentTankTemp = currentTankTemp;
-        this.currentLightsSchedule = currentLightsSchedule;
-        this.currentCo2Schedule = currentCo2Schedule;
     }
 
     public String getCurrentTime() {
@@ -35,11 +31,11 @@ public class AquarioData {
         this.currentTime = currentTime;
     }
 
-    public Date getCurrentDate() {
+    public String getCurrentDate() {
         return currentDate;
     }
 
-    public void setCurrentDate(Date currentDate) {
+    public void setCurrentDate(String currentDate) {
         this.currentDate = currentDate;
     }
 
@@ -58,20 +54,20 @@ public class AquarioData {
     public void setCurrentTankTemp(String currentTankTemp) {
         this.currentTankTemp = currentTankTemp;
     }
-
-    public List<DaySchedule> getCurrentLightsSchedule() {
-        return currentLightsSchedule;
-    }
-
-    public void setCurrentLightsSchedule(List<DaySchedule> currentLightsSchedule) {
-        this.currentLightsSchedule = currentLightsSchedule;
-    }
-
-    public List<DaySchedule> getCurrentCo2Schedule() {
-        return currentCo2Schedule;
-    }
-
-    public void setCurrentCo2Schedule(List<DaySchedule> currentCo2Schedule) {
-        this.currentCo2Schedule = currentCo2Schedule;
-    }
+//
+//    public List<DaySchedule> getCurrentLightsSchedule() {
+//        return currentLightsSchedule;
+//    }
+//
+//    public void setCurrentLightsSchedule(List<DaySchedule> currentLightsSchedule) {
+//        this.currentLightsSchedule = currentLightsSchedule;
+//    }
+//
+//    public List<DaySchedule> getCurrentCo2Schedule() {
+//        return currentCo2Schedule;
+//    }
+//
+//    public void setCurrentCo2Schedule(List<DaySchedule> currentCo2Schedule) {
+//        this.currentCo2Schedule = currentCo2Schedule;
+//    }
 }
