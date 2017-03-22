@@ -1,24 +1,36 @@
 package com.aquario.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DaySchedule {
 
+    private String type;
     private String day;
     private String firstStartTime;
     private String firstStopTime;
     private String secondStartTime;
     private String secondStopTime;
 
-    public DaySchedule(String day,
-                       String firstStartTime,
-                       String firstStopTime,
-                       String secondStartTime,
-                       String secondStopTime) {
+    public DaySchedule(@JsonProperty("type") String type,
+                       @JsonProperty("day") String day,
+                       @JsonProperty("firstStartTime") String firstStartTime,
+                       @JsonProperty("firstStopTime") String firstStopTime,
+                       @JsonProperty("secondStartTime") String secondStartTime,
+                       @JsonProperty("secondStopTime") String secondStopTime) {
+        this.type = type;
         this.day = day;
         this.firstStartTime = firstStartTime;
         this.firstStopTime = firstStopTime;
         this.secondStartTime = secondStartTime;
         this.secondStopTime = secondStopTime;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDay() {

@@ -1,26 +1,35 @@
 package com.aquario.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
 import java.util.List;
 
 public class AquarioData {
 
+    private String id = "1";
     private String currentTime;
     private String currentDate;
     private String currentDay;
     private String currentTankTemp;
-//    private List<DaySchedule> currentLightsSchedule;
-//    private List<DaySchedule> currentCo2Schedule;
+    private List<DaySchedule> currentLightsSchedule;
+    private List<DaySchedule> currentCo2Schedule;
 
-    public AquarioData(String currentTime,
-                       String currentDate,
-                       String currentDay,
-                       String currentTankTemp) {
+    public AquarioData(@JsonProperty("currentTime") String currentTime,
+                       @JsonProperty("currentDate") String currentDate,
+                       @JsonProperty("currentDay") String currentDay,
+                       @JsonProperty("currentTankTemp") String currentTankTemp) {
         this.currentTime = currentTime;
         this.currentDate = currentDate;
         this.currentDay = currentDay;
         this.currentTankTemp = currentTankTemp;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCurrentTime() {
@@ -54,20 +63,22 @@ public class AquarioData {
     public void setCurrentTankTemp(String currentTankTemp) {
         this.currentTankTemp = currentTankTemp;
     }
-//
-//    public List<DaySchedule> getCurrentLightsSchedule() {
-//        return currentLightsSchedule;
-//    }
-//
-//    public void setCurrentLightsSchedule(List<DaySchedule> currentLightsSchedule) {
-//        this.currentLightsSchedule = currentLightsSchedule;
-//    }
-//
-//    public List<DaySchedule> getCurrentCo2Schedule() {
-//        return currentCo2Schedule;
-//    }
-//
-//    public void setCurrentCo2Schedule(List<DaySchedule> currentCo2Schedule) {
-//        this.currentCo2Schedule = currentCo2Schedule;
-//    }
+
+    public List<DaySchedule> getCurrentLightsSchedule() {
+        return currentLightsSchedule;
+    }
+
+    public AquarioData setCurrentLightsSchedule(List<DaySchedule> currentLightsSchedule) {
+        this.currentLightsSchedule = currentLightsSchedule;
+        return this;
+    }
+
+    public List<DaySchedule> getCurrentCo2Schedule() {
+        return currentCo2Schedule;
+    }
+
+    public AquarioData setCurrentCo2Schedule(List<DaySchedule> currentCo2Schedule) {
+        this.currentCo2Schedule = currentCo2Schedule;
+        return this;
+    }
 }
