@@ -8,12 +8,16 @@ import ratpack.handling.Handler;
 
 public class PutAquarioDataHandler implements Handler {
 
+    private AquarioDao aquarioDao;
+    private ObjectMapper mapper;
+
+    public PutAquarioDataHandler(AquarioDao aquarioDao, ObjectMapper mapper) {
+        this.aquarioDao = aquarioDao;
+        this.mapper = mapper;
+    }
+
     @Override
     public void handle(Context ctx) throws Exception {
-
-        AquarioDao aquarioDao = new AquarioDao();
-
-        ObjectMapper mapper = new ObjectMapper();
 
         ctx.getRequest().getBody()
                 .map(is -> mapper.readValue(is.getBytes(), AquarioData.class))

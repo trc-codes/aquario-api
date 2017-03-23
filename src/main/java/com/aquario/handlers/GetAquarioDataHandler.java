@@ -11,25 +11,27 @@ import static ratpack.jackson.Jackson.json;
 
 public class GetAquarioDataHandler implements Handler {
 
+    private AquarioDao aquarioDao;
+
+    public GetAquarioDataHandler(AquarioDao aquarioDao) {
+        this.aquarioDao = aquarioDao;
+    }
+
     @Override
     public void handle(Context ctx) throws ExecutionException, InterruptedException {
 
-        AquarioDao aquarioDao = new AquarioDao();
-
         aquarioDao.getAquarioData()
                 .flatRight(ignored -> aquarioDao.getDaySchedulesData())
-                .then(pairOfDataAndSchedules -> {
-                    ctx.render(json(pairOfDataAndSchedules
-                            .getLeft()
-                            .setCurrentLightsSchedule(pairOfDataAndSchedules.getRight()
-                                    .stream()
-                                    .filter(schedule -> "lights".equals(schedule.getType()))
-                                    .collect(Collectors.toList()))
-                            .setCurrentCo2Schedule(pairOfDataAndSchedules.getRight()
-                                    .stream()
-                                    .filter(schedule -> "co2".equals(schedule.getType()))
-                                    .collect(Collectors.toList()))
-                    ));
-                });
+                .then(pairOfDataAndSchedules -> ctx.render(json(pairOfDataAndSchedules
+                        .getLeft()
+                        .setCurrentLightsSchedule(pairOfDataAndSchedules.getRight()
+                                .stream()
+                                .filter(schedule -> "lights".equals(schedule.getType()))
+                                .collect(Collectors.toList()))
+                        .setCurrentCo2Schedule(pairOfDataAndSchedules.getRight()
+                                .stream()
+                                .filter(schedule -> "co2".equals(schedule.getType()))
+                                .collect(Collectors.toList()))
+                )));
     }
 }
