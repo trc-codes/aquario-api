@@ -4,14 +4,19 @@ import com.aquario.data.dao.AquarioDao;
 import com.aquario.handlers.GetAquarioDataHandler;
 import com.aquario.handlers.PutAquarioDataHandler;
 import com.aquario.handlers.PutDaySchedulesHandler;
+import com.aquario.injectors.CassandraModule;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import ratpack.server.RatpackServer;
 
 public class Main {
 
     public static void main(String... args) throws Exception {
 
-        AquarioDao aquarioDao = new AquarioDao();
+        Injector cassandraService = Guice.createInjector(new CassandraModule());
+
+        AquarioDao aquarioDao = cassandraService.getInstance(AquarioDao.class);
 
         ObjectMapper mapper = new ObjectMapper();
 

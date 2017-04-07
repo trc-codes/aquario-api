@@ -2,25 +2,30 @@ package com.aquario.data.dao;
 
 import com.aquario.data.model.AquarioData;
 import com.aquario.data.model.DaySchedule;
+import com.aquario.services.CassandraService;
 import com.datastax.driver.core.*;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import ratpack.exec.Promise;
-
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
-
 import static java.util.Arrays.asList;
 
+@Singleton
 public class AquarioDao {
 
-    // Connect to the cluster and keyspace "aquario"
-    Cluster cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-    Session session = cluster.connect("aquario");
+    private CassandraService cassandraService;
+
+    @Inject
+    public AquarioDao(CassandraService cassandraService) {
+        this.cassandraService = cassandraService;
+    }
 
     public Promise<AquarioData> getAquarioData() throws ExecutionException, InterruptedException {
 
-        return execute(QueryBuilder.select().all().from("aquariodata")).map(rs -> {
+        return execute(QueryBuilder.select().all().from("aquariodata").where(QueryBuilder.eq("id", "1"))).map(rs -> {
             Row row = rs.one();
             return new AquarioData(row.getString("currenttime"), row.getString("currentdate"), row.getString("currentday"), row.getString("currenttanktemp"));
         });
@@ -62,8 +67,9 @@ public class AquarioDao {
 
     public Promise<ResultSet> execute(Statement statement) {
         return Promise.async(upstream -> {
-            ResultSetFuture resultSetFuture = session.executeAsync(statement);
+            ResultSetFuture resultSetFuture = cassandraService.getSession().executeAsync(statement);
             upstream.accept(resultSetFuture);
         });
     }
+
 }
