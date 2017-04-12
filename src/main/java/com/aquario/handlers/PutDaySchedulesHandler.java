@@ -2,6 +2,7 @@ package com.aquario.handlers;
 
 import com.aquario.data.dao.AquarioDao;
 import com.aquario.data.model.DaySchedule;
+import com.google.inject.Inject;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
@@ -9,6 +10,7 @@ public class PutDaySchedulesHandler implements Handler {
 
     private AquarioDao aquarioDao;
 
+    @Inject
     public PutDaySchedulesHandler(AquarioDao aquarioDao) {
         this.aquarioDao = aquarioDao;
     }

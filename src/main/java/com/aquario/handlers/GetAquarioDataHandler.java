@@ -1,6 +1,7 @@
 package com.aquario.handlers;
 
 import com.aquario.data.dao.AquarioDao;
+import com.google.inject.Inject;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
@@ -13,6 +14,7 @@ public class GetAquarioDataHandler implements Handler {
 
     private AquarioDao aquarioDao;
 
+    @Inject
     public GetAquarioDataHandler(AquarioDao aquarioDao) {
         this.aquarioDao = aquarioDao;
     }
